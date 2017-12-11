@@ -18,6 +18,8 @@ services:
                         - db
                 build:
                         context: .
+                links:
+                        - db
 
 volumes:
         db-data:
