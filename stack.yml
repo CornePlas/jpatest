@@ -7,8 +7,6 @@ services:
                         - POSTGRES_PASSWORD=jpapw
                 ports:
                         - "5432:5432"
-                volumes:
-                        - db-data:/var/lib/postgresql/data
 
         webapp:
                 depends_on:
@@ -17,8 +15,6 @@ services:
                         context: .
                 links:
                         - db
-                command: ["./wait-for-it.sh", "db:5432", "--", "java", "-jar", "/app.jar"]
+                command: ["./wait-for-it.sh", "db:5432", "java", "-jar", "/app.jar"]
 
-volumes:
-        db-data:
 
