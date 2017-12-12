@@ -16,5 +16,11 @@ services:
                 links:
                         - db
                 command: ["./wait-for-it.sh", "db:5432", "java", "-jar", "/app.jar"]
+                
+        adminer:
+                image: adminer
+                restart: always
+                ports:
+                        - 9000:8080
 
 
