@@ -13,6 +13,8 @@ services:
                         - db
                 build:
                         context: .
+                ports:
+                        - 8080:8080
                 links:
                         - db
                 command: ["./wait-for-it.sh", "db:5432", "java", "-jar", "/app.jar"]
