@@ -22,21 +22,12 @@
 --  Any similarity to existing people is purely coincidental.
 -- 
 
-DROP DATABASE IF EXISTS employees;
-CREATE DATABASE IF NOT EXISTS employees;
-USE employees;
-
-SELECT 'CREATING DATABASE STRUCTURE' as 'INFO';
-
 DROP TABLE IF EXISTS dept_emp,
                      dept_manager,
                      titles,
                      salaries, 
                      employees, 
                      departments;
-
-/*!50503 set default_storage_engine = InnoDB */;
-/*!50503 select CONCAT('storage engine: ', @@default_storage_engine) as INFO */;
 
 CREATE TABLE employees (
     emp_no      INT             NOT NULL,
