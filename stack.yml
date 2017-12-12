@@ -1,17 +1,14 @@
 version: "3"
 services:
         db:
-                image: mysql:latest
+                image: postgres:latest
                 restart: always
                 environment:
-                        - MYSQL_ROOT_PASSWORD=root
-                        - MYSQL_USER=jpatest
-                        - MYSQL_PASSWORD=jpapw
-                        - MYSQL_DATABASE=jpatest
+                        - POSTGRES_PASSWORD=jpapw
                 ports:
-                        - "3306:3306"
+                        - "5432:5432"
                 volumes:
-                        - db-data:/var/lib/mysql
+                        - db-data:/var/lib/postgresql/data
 
         webapp:
                 depends_on:
@@ -20,6 +17,7 @@ services:
                         context: .
                 links:
                         - db
+                command: ["./wait-for-it.sh", "db:5432", "--", "java", "-jar", "/app.jar"]
 
 volumes:
         db-data:

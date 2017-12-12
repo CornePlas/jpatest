@@ -5,7 +5,10 @@ COPY pom.xml /usr/src/myapp
 
 RUN mvn -f /usr/src/myapp/pom.xml clean package
 
-FROM openjdk:8-jdk-alpine
-VOLUME /tmp
+FROM openjdk:8-jre-slim
+RUN apt-get update -y
+RUN apt-get upgrade -y
+RUN apt-get -y install postgresql-client
+COPY wait-for-postgres.sh wait-for-postgres.sh
 COPY --from=BUILD /usr/src/myapp/target/*.jar app.jar
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
